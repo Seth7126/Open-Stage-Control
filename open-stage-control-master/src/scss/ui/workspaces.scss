@@ -1,0 +1,390 @@
+osc-workspace {
+
+    background: var(--color-ui-foreground);
+
+    --color-fill: var(--color-widget);
+    --color-stroke: var(--color-widget);
+
+    // optimize layout recalc
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+
+    display: flex;
+    flex-direction: row;
+
+    &.vertical {
+        flex-direction: column;
+    }
+    &.horizontal {
+        flex-direction: row;
+    }
+
+}
+
+osc-panel-container {
+
+    background: var(--color-ui-background);
+
+    position: relative;
+    display:flex;
+    flex-direction: column;
+
+    &.vertical {
+        flex-direction: column;
+    }
+    &.horizontal {
+        flex-direction: row;
+    }
+
+    &.center {
+        flex: 1;
+        z-index: 1;
+        min-width: 100rem;
+    }
+
+    &.left, &.right {
+        z-index: 2;
+        min-width: 0;
+        width: 0;
+        box-shadow: 0 0 0 1rem var(--color-background);
+
+        &.minimized {
+            box-shadow: none;
+        }
+
+        &:after {
+            // hover trap to display toggle-button when closed
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 1rem;
+            z-index: 1;
+        }
+
+        ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track-piece {
+            border-color: var(--color-ui-foreground)!important;
+        }
+
+    }
+    &.left:after {
+        right: -1rem;
+    }
+    &.right:after {
+        left: -1rem;
+    }
+
+    &.bottom, &.top {
+        z-index: 2;
+        min-height: 0;
+        height: 0;
+        &:after {
+            // hover trap to display toggle-button when closed
+            content: "";
+            position: absolute;
+            top: -1rem;
+            height: 1rem;
+            left: 0;
+            right: 0;
+            z-index: 1;
+        }
+        &.top:after {
+            bottom: -1rem;
+            top: auto;
+        }
+    }
+
+    .resize-handle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 4rem;
+        cursor: ew-resize;
+        z-index: 4;
+        &.right {
+            left: 0;
+        }
+        &.left {
+            right: 0;
+        }
+        &.bottom {
+            top:0;
+            left:0;
+            right:0;
+            height: 4rem;
+            width: auto;
+            cursor: ns-resize;
+        }
+        &.top {
+            top: auto;
+            bottom:0;
+            left:0;
+            right:0;
+            height: 4rem;
+            width: auto;
+            cursor: ns-resize;
+        }
+    }
+
+    .toggle-button {
+
+        position: absolute;
+        top: 50%;
+        height: 50rem;
+        width: 25rem;
+        margin-top: -25rem;
+        cursor: pointer;
+        background: var(--color-ui-background);
+        font-size: 14rem;
+        z-index: 2;
+        transition: transform 0.2s ease-out 0.1s, border-color 0.1s ease-out 0.1s;
+        will-change: transform;
+
+        border-style: solid;
+        border-width: 1rem;
+        border-color: transparent;
+
+        &:after {
+            font-family: FontAwesome;
+            line-height: 50rem;
+            width: 25rem;
+            text-align: center;
+            display: block;
+            opacity: 0;
+            transition: opacity 0.2s ease-out 0s;
+        }
+
+        &.left {
+            border-top-right-radius: 25rem;
+            border-bottom-right-radius: 25rem;
+            right: -25rem;
+            transform: translateX(-25rem);
+            border-left-width: 0;
+            &:after {
+                content:"\f104";
+                margin-left: -4rem;
+            }
+        }
+        &.right {
+            border-top-left-radius: 25rem;
+            border-bottom-left-radius: 25rem;
+            left: -25rem;
+            transform: translateX(25rem);
+            border-right-width: 0;
+
+
+            &:after {
+                content:"\f105";
+                margin-left: 4rem;
+            }
+        }
+
+        &.bottom {
+            border-top-left-radius: 25rem;
+            border-top-right-radius: 25rem;
+            top: -25rem;
+            height: 25rem;
+            width: 50rem;
+            left: 50%;
+            margin-left: -25rem;
+            margin-top: 0;
+            cursor: pointer;
+            transform: translateY(25rem);
+
+            &:after {
+                content:"\f107";
+                margin-top: 2rem;
+                width: 50rem;
+                height: 25rem;
+                line-height: 25rem;
+
+            }
+        }
+
+        &.top {
+            border-bottom-left-radius: 25rem;
+            border-bottom-right-radius: 25rem;
+            top: auto;
+            bottom: -25rem;
+            height: 25rem;
+            width: 50rem;
+            left: 50%;
+            margin-left: -25rem;
+            margin-top: 0;
+            cursor: pointer;
+            transform: translateY(- 25rem);
+
+            &:after {
+                content:"\f106";
+                margin-bottom: 2rem;
+                width: 50rem;
+                height: 25rem;
+                line-height: 25rem;
+
+            }
+        }
+
+    }
+
+    &:hover > .toggle-button, .toggle-button:hover {
+        transition: transform 0.2s ease-out 0s, border-color 0.3s ease-out 0s;
+        transform: translateX(0) translateY(0);
+        border-color: var(--color-background);
+        &:after {
+            transition: opacity 0.1s ease-in 0.1s;
+            opacity: 1;
+        }
+    }
+
+    &.minimized .toggle-button {
+        &.left:after {
+            content:"\f105";
+        }
+        &.right:after {
+            content:"\f104";
+        }
+        &.bottom:after {
+            content:"\f106";
+        }
+        &.top:after {
+            content:"\f107";
+        }
+    }
+
+    &.disabled {
+        pointer-events: none;
+    }
+
+    &.disabled .toggle-button {
+        display: none;
+    }
+
+    &.minimized osc-panel-inner {
+        display: none;
+    }
+
+}
+
+osc-modal-container {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+}
+
+osc-panel-inner {
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+    z-index: 3;
+    min-width: 0;
+    position: relative;
+    contain: strict;
+
+}
+
+// @keyframes test{
+//     0% {
+//         transform: scaleX(0);
+//         opacity: 0;
+//     }
+//     100% {
+//         transform: scaleX(1);
+//         opacity: var(--alpha-fill);
+//     }
+// }
+//
+// osc-panel-container:not(.disabled) osc-panel-header:before {
+//     animation: test 0.1s forwards;
+//
+// }
+
+osc-panel-header {
+
+    --alpha-fill: 0.5;
+
+    display: flex;
+    height: var(--nav-height);
+    align-items: center;
+    align-items: center;
+    justify-content: center;
+    position:relative;
+    letter-spacing: 1rem;
+    font-size: 109%;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    padding: 0 8rem;
+    flex-shrink: 0;
+    background: var(--color-ui-foreground);
+
+    &:before {
+        content: "";
+        position: absolute;
+        left: 0rem;
+        right: 0rem;
+        bottom: 0rem;
+        // opacity: var(--alpha-fill);
+        height: 1rem;
+        background: var(--color-background);
+        z-index: 101;
+    }
+
+}
+
+osc-panel-content {
+
+
+    flex: 1;
+    overflow-y: auto;
+
+    &.left, &.right {
+        &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-track-piece {
+            border-right: 1rem solid var(--color-ui-foreground);
+        }
+    }
+
+
+}
+
+#main {
+    flex: 1;
+    min-height: 40rem;
+    contain: strict;
+}
+
+#osc-greeting-header {
+    --alpha-fill: 0.75;
+    span {
+        opacity: 0.5;
+        position: absolute;
+        right: 12rem;
+    }
+    &.hidden {
+        display: none;
+        + #osc-container {
+            // optimize layout recalc
+            position: absolute;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            background: rgba(black, 0.35);
+        }
+    }
+
+    &:before {
+        bottom: 0;
+    }
+}
+
+#osc-container {
+    background: var(--color-background);
+    overflow: auto;
+}

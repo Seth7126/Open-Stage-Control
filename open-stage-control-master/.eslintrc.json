@@ -1,0 +1,57 @@
+{
+  "env": {
+    "es2021": true,
+    "browser": true,
+    "node": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-prototype-builtins": "off",
+    "no-console": "off",
+    "no-useless-escape": "off",
+    "no-self-assign": "off",
+    "no-empty": [
+      "error",
+      {
+        "allowEmptyCatch": true
+      }
+    ],
+    "no-unused-vars": [
+      "error",
+      {
+        "args": "none"
+      }
+    ],
+    "space-before-function-paren": [
+      "error",
+      "never"
+    ],
+    "indent": [
+      "error",
+      4,
+      {
+        "SwitchCase": 1,
+        "ObjectExpression": 1,
+        "ArrayExpression": 1,
+        "MemberExpression": "off",
+        "ignoredNodes": ["ConditionalExpression", "TemplateElement"]
+      }
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "single",
+       { "allowTemplateLiterals": true }
+    ],
+    "semi": [
+      "error",
+      "never"
+    ]
+  }
+}

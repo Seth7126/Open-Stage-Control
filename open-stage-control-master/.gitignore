@@ -1,0 +1,16 @@
+# npmg
+node_modules/
+
+# build
+/app/
+
+# python/midi build
+src/server/python/*
+!src/server/python/*.py
+
+# docs build
+src/docs/widgets-reference.js
+properties-reference.md
+
+# packaging
+dist/

@@ -1,0 +1,77 @@
+.fader-container,
+.scrollbar-container,
+.knob-container,
+.encoder-container,
+.range-container {
+
+    --color-knob: var(--color-fill);
+
+    canvas {
+        image-rendering: pixelated;
+        width: 100%;
+        height: auto;
+    }
+
+}
+
+.scrollbar-container,
+.fader-container,
+.range-container {
+
+    width: 50rem;
+    height: 200rem;
+
+    --widget-padding: 1rem;
+    --knob-size: 1rem;
+    --line-width: 1rem;
+
+    canvas {
+        text-align: left;
+    }
+
+    &.horizontal {
+        width: 200rem;
+        height: 50rem;
+    }
+
+    &.design-default {
+        --knob-size: 20rem;
+        --widget-padding: 10rem;
+        --alpha-stroke: 0.5;
+        --alpha-fill-off: 0.25;
+        --alpha-fill-on: 1;
+        --line-width: 2rem
+    }
+
+    &.design-round {
+        --knob-size: 20rem;
+        --widget-padding: 10rem;
+        --alpha-stroke: 0.25;
+        --alpha-fill-off: 0.25;
+        --alpha-fill-on: 1;
+        --line-width: 2rem
+    }
+
+}
+
+.knob-container,
+.encoder-container {
+
+    width: 100rem;
+    height: 100rem;
+
+    --widget-padding: 1rem;
+    --alpha-stroke: 0.75;
+
+    &.design-solid, &.design-line {
+        --alpha-fill-off: 0.25;
+        --alpha-fill-on: 1;
+        --line-width: 2rem;
+    }
+
+}
+
+.scrollbar-container {
+    --alpha-fill-off: 0;
+    --alpha-fill-on: var(--alpha-scrollbar);
+}

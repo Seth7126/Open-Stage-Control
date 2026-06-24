@@ -1,0 +1,191 @@
+$padding: 8rem;
+
+#osc-console {
+    background: var(--color-background);
+    osc-panel-header {
+        background: var(--color-ui-foreground);
+        border-top: 1rem solid var(--color-background);
+    }
+    .toggle-button {
+        border-bottom: none;
+    }
+
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track-piece {
+        border-left-color: var(--color-background)!important;
+        border-top-color: var(--color-background)!important;
+    }
+
+    .actions {
+        position: absolute;
+        right: 0;
+        padding: $padding;
+
+        div {
+            cursor: pointer;
+            color: var(--color-text);
+            opacity: 0.25;
+            &:hover {
+                opacity: 0.5
+            }
+        }
+        i {
+            pointer-events: none;
+        }
+    }
+    osc-panel-content {
+        display: flex;
+        flex-direction: column;
+        font-family: $font-mono;
+    }
+
+}
+
+.editor-disabled #osc-console.minimized {
+    &:after {
+        // disable hover trap
+        display: none;
+    }
+    > .toggle-button {
+        // disable toggle button
+        display: none;
+    }
+}
+
+osc-console {
+    height: 100%;
+    padding: $padding 0;
+    overflow-y: auto;
+    border-bottom: 1rem dotted rgba(255,255,255,0.2);
+    user-select: text;
+}
+
+osc-console-message {
+
+    user-select: text;
+    cursor: text;
+    display: block;
+    white-space: pre-line;
+    position: relative;
+    padding-left: $padding + 18rem;
+    padding-right: $padding;
+    padding-bottom: 6rem;
+    border-bottom: 1rem dotted rgba(255,255,255,0.1);
+    &:before {
+        font-family: FontAwesome;
+        width: 12rem;
+        display: inline-block;
+        text-align: center;
+        position: absolute;
+        left: $padding;
+    }
+    &.log:before {
+        content: "\f105\f105"
+    }
+    &.error {
+        color: var(--color-error);
+        &:before {
+            content: "x"
+        }
+    }
+    &.input {
+        &:before {
+            content: "\f105\f105";
+        }
+    }
+    &.output {
+        &:before {
+            content: "\f104\f104"
+        }
+
+        &.undefined {
+            // color: var(--color-text)
+            opacity: 0.5;
+            border-bottom: 1rem dotted rgba(255,255,255,0.20);
+        }
+
+        &.value {
+            color: var(--color-accent);
+            opacity: 1;
+        }
+    }
+
+
+    margin-bottom: 4rem;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    .edit-widget {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        // padding: 2rem;
+        border-radius: 2rem;
+        &.editing {
+            background: var(--color-ui-foreground);
+        }
+        &[data-widget="CONSOLE"] {
+            cursor: default;
+            background: none;
+            padding: 1rem;
+        }
+    }
+    * {
+        user-select: inherit;
+    }
+
+    flex:1;
+}
+
+osc-console-input {
+    display: block;
+    $field-height: 24rem;
+    padding-left: 10rem;
+
+    &:before {
+        content: "\f105\f105";
+        font-family: FontAwesome;
+        width: 16rem;
+        display: inline-block;
+        text-align: center;
+        position: absolute;
+        left: 0;
+        line-height: $field-height - 6rem;
+        padding: 4rem 6rem;
+        color: var(--color-accent);
+    }
+    textarea {
+        font-family: $font-mono;
+
+        line-height: $field-height - 6rem;
+        padding: 4rem 16rem;
+        flex: 1;
+        overflow-x: auto;
+        overflow-y: hidden;
+        resize: none;
+        white-space: pre;
+        display: block;
+        background: var(--color-background);
+        width: 100%;
+        cursor: text;
+
+        user-select: initial;
+
+        --scrollbar-size: 6rem;
+
+        // Chromium scrollbar
+        &::-webkit-scrollbar-thumb:horizontal {
+            cursor: normal;
+        }
+
+        // Firefox scrollbar (hidden to preserve height)
+        scrollbar-width: thin;
+        &[rows="1"] {
+            scrollbar-width: none;
+        }
+    }
+}

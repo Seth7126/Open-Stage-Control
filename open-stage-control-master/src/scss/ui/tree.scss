@@ -1,0 +1,214 @@
+#osc-tree {
+
+    --alpha-fill: 0.5;
+    --widget-padding: -1rem;
+
+    $padding: 8rem;
+    $radius: 3rem;
+    $line-height: 28rem;
+    $field-height: 30rem;
+    padding-right: 0;
+
+    text-transform: none;
+    line-height: $line-height;
+
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .tree {
+        width: 100%;
+        flex: 1;
+        position: relative;
+        overflow: auto;
+        padding-left:$padding + 4rem;
+        padding-right:$padding;
+        border-top:1rem solid var(--color-background);
+        box-shadow: 0 1rem 0 0 inset rgba(white, 0.025);
+        padding-top:1rem;
+
+        &::-webkit-scrollbar-thumb, &::-webkit-scrollbar-track-piece {
+            border-color: var(--color-background)!important;
+        }
+
+    }
+
+    ol {
+
+        list-style: none;
+        position: relative;
+        padding-left: 16rem;
+        display: inline-block;
+        min-width: 100%;
+
+        ol:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: $line-height / 2 - 1;
+            left: -12rem;
+            border-left: 1rem solid var(--color-stroke);
+            opacity: 0.25;
+            pointer-events: none;
+        }
+    }
+
+    li {
+
+        position: relative;user-select: none;
+        > ol {
+            // display: none;
+            display: block;
+            height: 0rem;
+
+            > li {
+                display: none;
+            }
+        }
+        &.expanded > ol {
+            display: block;
+            // min-height: 8rem;
+            opacity: 1;
+            height: auto;
+            > li {
+                display: list-item;
+            }
+
+        }
+
+        &.sortable-ghost {
+            height: 2rem;
+            margin-bottom: 6rem;
+            margin-top: 4rem;
+            color: transparent;
+            overflow: hidden;
+            display: list-item!important
+        }
+
+        > i {
+            position: relative;
+            top: 1rem;
+            left: -2rem;
+            margin-right: 2rem;
+            pointer-events: none;
+        }
+
+        li:before {
+            content: "";
+            position: absolute;
+            top: $line-height / 2;
+            left: -27rem;
+            width: 16rem;
+            border-bottom: 1rem solid var(--color-stroke);
+            opacity: 0.25;
+            pointer-events: none;
+        }
+        .container:before {
+            width: 8rem;
+        }
+
+        &.invisible {
+            opacity: 0.5;
+            font-style: italic;
+            // &:after {
+            //     content: "\f070";
+            //     font-family: FontAwesome;
+            //     width: 12rem;
+            //     display: block;
+            //     position: absolute;
+            //     right: -12rem;
+            // }
+        }
+        .fa-lock {
+            position: relative;
+            margin-left: 4rem;
+            top:0;
+            font-size: 80%;
+            opacity: 0.8;
+        }
+
+    }
+
+    .toggle {
+        &:before {
+            content: "\f054";
+            font-family: FontAwesome;
+            width: 20rem;
+            display: block;
+            position: absolute;
+            left: -21rem;
+            font-style: normal;
+            text-align: center;
+        }
+        cursor: pointer;
+    }
+
+    .container.expanded > .toggle:before {
+        content: "\f078";
+    }
+
+    .editing {
+        z-index: 1;
+        @include pseudo-fill($z: -1);
+        &:after {
+            left: calc(-1 * var(--depth) * 20rem - #{$padding});
+            right: 1rem - $padding;
+            bottom: auto;
+            height: $line-height;
+            top: 0;
+        }
+
+        &.editor-blink:after {
+            animation: tree-editor-blink 0.51s steps(3) infinite;
+        }
+        @keyframes tree-editor-blink {
+            from {--color-fill: var(--color-warning)}
+            to {--color-fill: inherit}
+        }
+    }
+
+    .contains-editing:not(.expanded):not(.editing) {
+        z-index: 1;
+        @include pseudo-fill($z: -1);
+        &:after {
+            left: calc(-1 * var(--depth) * 20rem - #{$padding});
+            right: 1rem - $padding;
+            bottom: auto;
+            height: $line-height;
+            opacity: 0.1;
+        }
+    }
+
+
+    .filter {
+        display: block;
+        font-family: $font;
+        // line-height: $field-height;
+        padding: 0 $padding;
+        top: 0;
+        z-index: 2;
+        background: var(--color-background);
+        border: 1rem solid var(--color-background);
+        margin: $padding;
+        border-radius: $radius;
+    }
+
+    .filter-active .filter-hide {
+        display:none;
+    }
+
+    .fragment-mode-warning {
+        color: var(--color-warning);
+        padding: 0 $padding;
+        text-align: center;
+        line-height: $field-height;
+        background: var(--color-ui-foreground);
+        border-bottom: 1rem solid var(--color-background);
+        display: none;
+    }
+
+}
+
+.fragment-mode .fragment-mode-warning {
+    display: block!important;
+}

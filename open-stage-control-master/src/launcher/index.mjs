@@ -1,0 +1,5 @@
+import '../client/globals.mjs'
+import '../client/events/event-emitter.mjs'
+import '../client/ui/ui-workspace.mjs'
+import '../client/ui/zoom.mjs'
+import './main.mjs'

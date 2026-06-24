@@ -1,0 +1,185 @@
+osc-keyboard {
+    --spacing: 2rem;
+    --max-height: 300rem;
+    --max-width: 1200rem;
+
+    height:calc(33% + 40rem);
+    z-index: 100;
+    position: fixed;
+    bottom: 0;
+    left:0;
+    right: 0;
+    backdrop-filter: blur(12px);
+    @supports not (backdrop-filter: blur(12px)) {
+        background: var(--color-ui-background);
+    }
+    display: none;
+    flex-direction: column;
+    padding: var(--spacing);
+    align-items: center;
+    background: rgba(black, 0.25);
+    max-height: var(--max-height);
+    border-top: 1rem solid var(--color-background);
+
+    @keyframes keyboard-in {
+        from {opacity: 0}
+        to {opacity: 1}
+    }
+    @keyframes caret-blink {
+        to {visibility: hidden}
+    }
+
+    animation: keyboard-in 0.25s forwards;
+
+    .textarea {
+        height: auto;
+        overflow-y: auto;
+        width: 100%;
+        height: 40rem;
+        background: transparent;
+        padding: 14rem 20rem 4rem;
+        resize: none;
+        text-align: center;
+        vertical-align: middle;
+        font: inherit;
+        margin-top:var(---spacing);
+        position: relative;
+        pointer-events: auto;
+        cursor: text;
+        char {
+            margin: 0 0.25rem;
+            position: relative;
+        }
+        .newline + char:before, char:first-child:before {
+            content: " ";
+            display: block;
+            position: absolute;
+            left: -100rem;
+            width: 100rem;
+        }
+        .newline:before, char:last-child:before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top:  0;
+            right: -100rem;
+            width: 100rem;
+        }
+        .caret {
+            &:after {
+                content: "";
+                height: 10rem;
+                box-shadow: 0 0 0 1rem var(--color-accent);
+                position: relative;
+                animation: caret-blink 1.2s steps(2, start) infinite;
+                pointer-events: none;
+            }
+
+        }
+        .select {
+            background: var(--color-accent);
+            box-shadow: 0 0 0 1rem var(--color-accent);
+            color: var(--color-background);
+        }
+        &.first-char-caret {
+            &:before {
+                content: "";
+                height: 10rem;
+                position: absolute;
+                box-shadow: 0 0 0 1rem var(--color-accent);
+                animation: caret-blink 1.2s steps(2, start) infinite;
+            }
+        }
+    }
+
+    .row {
+        flex-direction: row;
+        display: flex;
+        flex: 1;
+        max-width: var(--max-width);
+        width: 100%;
+        &:last-child .key {
+            margin-bottom: 0;
+        }
+        &:first-child {
+            height: 40rem;
+            min-height: 40rem;
+            flex-shrink: 0;
+            overflow: hidden;
+            margin-bottom: var(--spacing);
+        }
+    }
+    key {
+        background: rgba(white, 0.05);
+        border-color: var(--color-ui-background);
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        --alpha-fill: 0.1;
+        --color-fill: var(--color-accent);
+        --widget-padding: -1rem;
+        @include pseudo-fill($z: 1);
+        margin-right: var(--spacing);
+        margin-bottom: var(--spacing);
+        &:last-child{
+            margin-right: 0;
+        }
+        span {
+            pointer-events: none;
+            align-items: center;
+            justify-content: center;
+            &.display-default {
+                display: flex;
+            }
+            &.display-shift {
+                display: none;
+            }
+        }
+
+        &.active {
+            --alpha-fill: 0.3!important;
+        }
+    }
+
+    .enter {
+        --alpha-fill: 0.15;
+    }
+
+    .tab, .shift {
+        flex: 1.5;
+    }
+
+    .enter, .right-shift, .lock, .bksp {
+        flex: 2;
+    }
+
+    .sep {
+        display: none;
+    }
+    .sep ~ key {
+        flex-shrink: 0;
+        flex-grow: 0;
+        min-width: 5%;
+        --alpha-fill: 0.15;
+
+    }
+
+    &.shift {
+        key {
+            .display-shift {
+                display: flex;
+            }
+            .display-default {
+                display: none;
+            }
+        }
+    }
+    @media screen and (max-width: 800px) {
+        key {
+            font-size: 80%
+        }
+    }
+
+}

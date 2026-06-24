@@ -1,0 +1,123 @@
+:root {
+    --osc-background-color: rgb(21,26,36);
+    --osc-accent-color: #448aff;
+}
+
+html {
+    overflow-y: scroll;
+}
+
+.md-header, .md-nav__title[for=__drawer] {
+    background-color: var(--osc-background-color)!important;
+}
+
+@media screen and (min-width:1220px) {
+    .md-nav__title[for=__drawer] {
+        background-color: transparent!important;
+    }
+}
+
+.md-header-nav__title {
+    padding-top: 1px;
+    padding-left: 0!important
+}
+
+.md-source__facts {
+    display: none;
+}
+
+td:first-child {
+    white-space: pre!important;
+    vertical-align: top;
+}
+
+
+.force-full-table + .md-typeset__scrollwrap .md-typeset__table {
+    width:100%;
+}
+.force-full-table + .md-typeset__scrollwrap .md-typeset__table table {
+    display: table!important;
+    width:100%;
+}
+
+
+.accordion {
+    margin: 1.5625em 0;
+    padding: .6rem;
+    overflow: hidden;
+    font-size: .64rem;
+    page-break-inside: avoid;
+    border-left: .2rem solid var(--osc-accent-color);
+    border-radius: .1rem;
+    box-shadow: 0 0.2rem 0.5rem rgba(0,0,0,.05), 0 0 0.05rem rgba(0,0,0,.1);
+}
+.accordion h6 {
+    cursor: pointer;
+    margin-top: 0;
+}
+
+.accordion > :last-child {
+    display: none;
+}
+.accordion .md-typeset__table {
+    margin-bottom: 0;
+}
+.accordion.show > :last-child {
+    display: block;
+    margin-bottom: 0;
+}
+.accordionlink > .headerlink {
+    opacity: 1!important;
+    visibility: visible!important;
+    text-decoration: none;
+    color: inherit!important;
+    display: block;
+    outline: none;
+    box-shadow: none;
+    margin-left: 0;
+}
+.accordion-description {
+    opacity: 0.8;
+}
+.accordion.show .accordion-description {
+   margin-bottom: 8px;
+}
+
+table .thead2 {
+    background: rgba(0, 0, 0, 0.05);
+    white-space: nowrap;
+}
+table .thead2 h6 {
+    color: #888;
+}
+
+details.api h4 {
+    padding: 0;
+    margin: 0;
+}
+details.api summary {
+    padding-left: 0.6rem;
+}
+details.api summary:before {
+    display: none!important;
+}
+
+details summary div {
+    display: inline-block;
+}
+
+i[title="dynamic"] {
+    color: var(--osc-accent-color);
+}
+
+
+.patreon-icon {
+    margin-top: 2em!important;
+    color: black!important;
+    display: block;
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg fill="black" viewBox="0 0 569 546" xmlns="http://www.w3.org/2000/svg"><g><circle cx="362.589996" cy="204.589996" data-fill="1" id="Oval" r="204.589996"></circle><rect data-fill="2" height="545.799988" id="Rectangle" width="100" x="0" y="0"></rect></g></svg>');
+    background-size: 20px 30px;
+    background-repeat: no-repeat;
+    background-position: 20px center;
+    padding-left: 3em!important;
+}

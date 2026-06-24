@@ -1,0 +1,22 @@
+.editor-enabled {
+    &:not(.no-grid) {
+        .root-container,
+        .tab-container,
+        .modal-container,
+        .panel-container {
+            > inner {
+                background-image: linear-gradient(to bottom, var(--color-grid)  1rem,  transparent 1rem),
+                linear-gradient(to right, var(--color-grid)  1rem,  transparent 1rem);
+                --size: calc(var(--grid-width) * 1rem);
+                background-size: var(--size) var(--size);
+                background-attachment: local;
+                background-position: 0rem 0;
+            }
+        }
+    }
+
+    .widget:not(.not-editable) {
+        pointer-events: initial!important;
+    }
+
+}

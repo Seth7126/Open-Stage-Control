@@ -1,0 +1,92 @@
+.widget {
+    font-weight: 500;
+
+    overflow: hidden;
+    position:relative;
+    vertical-align:top;
+
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    max-width: 100%;
+    max-height: 100%;
+    width: 100rem;
+    height: 100rem;
+
+
+    contain: strict;
+    @supports not (contain: strict) {
+        transform: rotateZ(0); // force new stacking context
+    }
+
+    -webkit-tap-highlight-color:transparent;
+
+    // transform-origin: top left;
+
+    --line-width: 1rem;
+    --widget-padding: 1rem;
+
+    --color-stroke:var(--color-widget);
+    --color-fill:var(--color-widget);
+
+    --alpha-stroke: 0.5;
+    --alpha-fill-off: 0.0;
+    --alpha-fill-on: 0.25;
+    --alpha-fill: var(--alpha-fill-off);
+
+    --alpha-pips: 0.5;
+    --alpha-pips-text: 0.7;
+    --border-radius: 0;
+
+    border-radius: var(--border-radius);
+
+
+    color: var(--color-text);
+
+    background-color: transparent;
+    background-clip: content-box;
+
+
+    &.absolute-position {
+        position: absolute;
+        z-index: 10;
+    }
+
+    canvas {
+        flex: 1;
+        height: auto;
+        min-height: 0;
+        min-width: 0;
+    }
+
+    > inner {
+        overflow: hidden;
+        position: relative;
+        flex: 1;
+        border-radius: inherit;
+    }
+
+    &.no-interaction {
+        pointer-events: none;
+        > * {
+            pointer-events: none
+        }
+    }
+
+    .html {
+        text-align: center;
+        line-height: 30rem;
+        min-height: 0;
+    }
+
+}
+
+
+@import 'widgets/basics';
+@import 'widgets/containers';
+@import 'widgets/graphs';
+@import 'widgets/frames';
+@import 'widgets/indicators';
+@import 'widgets/pads';
+@import 'widgets/sliders';

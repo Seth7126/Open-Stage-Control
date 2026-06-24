@@ -1,0 +1,100 @@
+site_name: Open Stage Control
+repo_name: open-stage-control
+repo_url: https://framagit.org/jean-emmanuel/open-stage-control
+edit_uri: tree/master/resources/docs/
+copyright: "Copyleft © Jean-Emmanuel Doucet @ <a href='http://ammd.net'>AMMD</a> (<a href='https://framagit.org/jean-emmanuel/open-stage-control/-/blob/master/LICENSE'>GNU/GPLv3</a>)"
+site_description: "Libre and modular OSC / MIDI controller"
+site_dir: '../app/docs/'
+latest_release: 1.30.3
+
+theme:
+    name: 'material'
+    custom_dir: 'overrides'
+    features:
+        - navigation.tabs
+        - navigation.instant
+    palette:
+        primary: 'Indigo'
+        accent: 'Indigo'
+    logo: 'img/logo_nobadge.png'
+    favicon: 'img/logo_nobadge.png'
+    include_search_page: false
+    search_index_only: true
+
+extra_css:
+  - 'extra/styles.css'
+extra_javascript:
+  - 'extra/scripts.js'
+
+nav:
+    - Home: index.md
+    - Download:
+        - download.md
+    - Documentation:
+        - Getting started:
+            - docs/getting-started/introduction.md
+            - docs/getting-started/server-configuration.md
+            - docs/getting-started/running-from-sources.md
+            - docs/getting-started/running-with-node.md
+        - Tutorials:
+            - docs/tutorials/first-steps.md
+            - docs/tutorials/change-property-with-osc.md
+        - User interface:
+            - docs/user-interface/launcher.md
+            - docs/user-interface/client.md
+            - docs/user-interface/editor.md
+        - Widgets:
+            - docs/widgets/general-mechanics.md
+            - docs/widgets/properties-reference.md
+            - docs/widgets/advanced-syntaxes.md
+            - docs/widgets/scripting.md
+            - docs/widgets/fragments.md
+            - docs/widgets/canvas.md
+        - MIDI:
+            - MIDI configuration: docs/midi/midi-configuration.md
+            - MIDI messages: docs/midi/midi-messages.md
+        - Custom module:
+            - docs/custom-module/custom-module.md
+            - docs/custom-module/managing-big-modules.md
+            - docs/custom-module/examples.md
+        - Customization:
+            - docs/customization/themes.md
+            - docs/customization/css-tips.md
+        - Client options: docs/client-options.md
+        - Remote control: docs/remote-control.md
+        - Credits: docs/credits.md
+        - Changelog: docs/changelog.md
+    - Community:
+        - 'Community forums': 'https://openstagecontrol.discourse.group'
+
+markdown_extensions:
+    - markdown.extensions.extra
+    - markdown.extensions.admonition
+    - codehilite:
+        guess_lang: False
+    - markdown.extensions.def_list
+    - markdown.extensions.footnotes
+    - markdown.extensions.meta
+    - markdown.extensions.toc:
+        permalink: "#"
+    - pymdownx.arithmatex
+    - pymdownx.betterem:
+        smart_enable: all
+    - pymdownx.caret
+    - pymdownx.critic
+    - pymdownx.inlinehilite
+    - pymdownx.magiclink
+    - pymdownx.mark
+    - pymdownx.smartsymbols
+    - pymdownx.superfences
+    - pymdownx.tasklist:
+        custom_checkbox: true
+    - pymdownx.tilde
+    - pymdownx.keys
+    - pymdownx.tabbed:
+        alternate_style: true
+    - pymdownx.details
+
+
+plugins:
+  - macros

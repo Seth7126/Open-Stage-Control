@@ -1,0 +1,31 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<h1>Woops, nothing here !</h1>
+
+<p>(404 error)</p>
+
+<style>
+html {
+    overflow-y: scroll
+}
+.md-sidebar--secondary {
+  display: none;
+}
+@media screen and (min-width: 76.25em) {
+    .md-sidebar--primary {
+      display: none;
+    }
+}
+.md-content {
+    margin: 0;
+}
+.md-content__inner {
+    margin-left: .8rem;
+    margin-right: .6rem;
+}
+</style>
+
+
+{% endblock %}

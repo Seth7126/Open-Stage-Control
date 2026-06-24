@@ -1,0 +1,92 @@
+// Dirty browser window shim
+import * as DOM from '../client/dom.mjs'
+
+// eslint-disable-next-line no-global-assign
+document = {
+    createElement: x=>({
+        ownerDocument: document,
+        addEventListener: ()=>{},
+        style: {setProperty: ()=>{}},
+        nodeName: '',
+        childNodes: [],
+        setAttribute: ()=>{},
+        appendChild: ()=>{},
+        lastChild: {},
+        toString: ()=>' ',
+        removeChild: ()=>{},
+        getPropertyValue: ()=>{},
+        contentWindow: {
+            document: {
+                open: ()=>{},
+                close: ()=>{},
+                write: ()=>{},
+            }
+        },
+    }),
+    getElementById: ()=>document.createElement(),
+    createTextNode: x=>({
+        nodeValue: '',
+        nodeName: '',
+        childNodes: [],
+        setAttribute: ()=>{},
+        appendChild: ()=>{},
+        lastChild: {},
+        toString: ()=>' '
+    }),
+    createElementNS: x=>[],
+    addEventListener: ()=>{},
+    createRange: ()=>{
+        return {
+            createContextualFragment:()=>{return {
+                firstChild: {
+                    querySelectorAll: x=>[]
+                }
+            }},
+            selectNode: ()=>{}
+        }
+    },
+    body: {
+        appendChild: ()=>{},
+        addEventListener: ()=>{}
+    },
+    location: {search: ''},
+}
+document.documentElement = document.createElement()
+
+// eslint-disable-next-line no-global-assign
+window = {
+    screen: {width: 800, height: 600},
+    addEventListener: ()=>{},
+    location: {search: ''},
+    Image: Function,
+    document: document,
+    NodeList: Array,
+    WebSocket: Object,
+    localStorage: {
+        getItem(){return null}
+    },
+    sessionStorage: {
+        getItem(){return null},
+        setItem(){},
+    },
+    getComputedStyle: ()=>document.createElement(),
+    MutationObserver: class MutationObserver{},
+    ELECTRON_NOGPU: false,
+    CANVAS_FRAMERATE: 1,
+    LANG: 'en',
+    ENV: {id: ''},
+    IP: '',
+    DOM
+}
+
+if (!global.navigator) {
+    // defined as getter since node 22
+    window.navigator = {
+        platform:'',
+        userAgent: ''
+    }
+}
+
+Object.assign(global, window)
+
+console.debug = ()=>{}

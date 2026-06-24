@@ -1,0 +1,27 @@
+.eq-container,
+.visualizer-container,
+.plot-container {
+
+    width: 200rem;
+    height: 200rem;
+
+    --alpha-fill-off: 0.05;
+    --alpha-fill-on: 0.1;
+    --widget-padding: 20rem;
+
+    inner {
+        position: relative;
+        flex: 1;
+        display: flex;
+
+        @include pseudo-fill($z: -1);
+        @include pseudo-stroke();
+        // padding: var(--widget-padding);
+    }
+
+    canvas {
+        // margin: var(--widget-padding);
+        width: 100%;
+    }
+
+}
